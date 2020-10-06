@@ -1,7 +1,9 @@
 # SendMessage
 06/10
-+Instalar el HolaMundo en el movil
-+Activar opciones de desarrollador
+-Instalar el HolaMundo en el movil
+
+-Activar opciones de desarrollador
+
 -Activar depuracion y aceptar
 -Adb -s [dispositivo a entrar] shell // para elegir
 -Diferentes editores ver ReadMe
