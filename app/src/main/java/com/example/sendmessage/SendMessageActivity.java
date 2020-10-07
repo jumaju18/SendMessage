@@ -5,22 +5,37 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+/**
+ * <h1>Funcionalidad de la clase</h1>
+ * ESta clase envía dos cadenas {@link java.lang.String}: el usuario y el mensaje a la clase
+ * {@link ViewMessageActivity}
+ * @author Juan Francisco González
+ * @version 1.0, 06/10/2020
+ * @see <a target="_blank" href="ttps://developer.android.com">Android DEV</a>
+ * */
 
 public class SendMessageActivity extends AppCompatActivity {
 
     private EditText edUser;
     private EditText edMessage;
+    private final static String TAG="SendMessageActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_message);
+        Logger.addLogAdapter(new AndroidLogAdapter());
+        Log.d(TAG, "SendMessageActivity -> onCreate()");
+        //
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -50,4 +65,36 @@ public class SendMessageActivity extends AppCompatActivity {
             }
         });
     }
+    //region Métodos Callback del ciclo de vida
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Logger.d(TAG, "SendMessageActivity -> onStart()");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Logger.d(TAG, "SendMessageActivity -> onResume()");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Logger.d(TAG, "SendMessageActivity -> onPause()");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Logger.d(TAG, "SendMessageActivity -> onStop()");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "SendMessageActivity -> onDestroy()");
+    }
+    //endregion
 }
