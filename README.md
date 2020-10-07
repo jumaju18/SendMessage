@@ -34,3 +34,20 @@ android:id="@+id/edUser". de-> android:text="..."  a ->tools:text="..."
 -volvemos al .java, tenemos que crear un objeto boundler
 
 -creamos el intent y depués hacemos el startActivity
+
+07/10
+-javadoc (cabecera de cada .java)
+
+-tipos de comentario y /region
+
+-mirar logcat para errores
+
+-ciclo de vida del activity
+
+-añadir librerías de terceros
+
+-https://github.com/jrvansuita/MaterialAbout
+
+-no olvidar <activity android:name=".AboutActivity"></activity> en el manifest
+
+
