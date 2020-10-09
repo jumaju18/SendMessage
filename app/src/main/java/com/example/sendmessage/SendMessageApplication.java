@@ -2,15 +2,16 @@ package com.example.sendmessage;
 
 import android.app.Application;
 
-import com.example.sendmessage.modelo.User;
+import com.example.sendmessage.model.User;
 
-public class SendMessageAplication extends Application {
+public class SendMessageApplication extends Application {
+
     private User user;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        user = new User("jf", "jf", "jumaju01_@hotmail.com");
+        user = new User("Israel", "Israel", "ejemplo@gmail.com");
     }
 
     public User getUser() {

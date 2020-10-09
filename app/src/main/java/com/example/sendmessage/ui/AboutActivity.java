@@ -9,6 +9,7 @@ import com.example.sendmessage.R;
 import com.vansuita.materialabout.builder.AboutBuilder;
 import com.vansuita.materialabout.views.AboutView;
 
+
 public class AboutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class AboutActivity extends AppCompatActivity {
                 .build();
 
 
+
         //addContentView(view, layoutParams);
     }
 }
-
