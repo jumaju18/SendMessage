@@ -135,3 +135,85 @@ Añadimos 2 textview al layout view_message
 
 Asignamos los String a los textview con .setText();
 
+9/10
+
+1º
+Refactorizamos el código
+
+Creamos un método llamado SendMessage el cual será llamado en el método sobreescrito OnClick().
+
+Cambiamos la construccion del intent al estar en un metodo dentro de la clase
+(sin estar dentro de otro metodo) se puede poner directamente this sin especificar la clase
+
+2º
+Explicacion clase POJO. Son clases que representan directamente los datos de la base de datos, es decir,
+si tuvieramos una tabla persona con 3 columnas (id,nombre,salario) la clase POJO es literalmente una representación
+de estos valores (buscar en internet o preguntar si no se entiende).
+
+3º
+Creamos 2 packages nuevos para guardar las clases en com.example.sendmessage llamadas com.example.sendmessage.ui para los Activity
+y com.example.sendmessage.model para las clases POJO.
+(en com.example.sendmessage click derecho -> new -> Package)
+
+Dentro de model creamos una nueva clase java para user llamada user en la cual creamos 3 variables y generamos
+(Code -> Generate -> getter and setter y seleccionamos las 3 variables) y tambien generamos el metodo
+ToString() para sobreescrbirlo (Control+O -> ToString()) y sobreescribimos y hacemos lo mismo con equals y HashCode y constructor
+(Code -> Generate -> equals and hashcode)
+
+Creamos otra clase Java llamada Message y creamos 3 variables (esta vez user es de tipo User)
+y hacemos lo mismo que con la clase anterior
+(generamos setter and getter, ToString, equals y hash y constructor
+IMPORTANTE ESTA VEZ GENERAR EQUALS Y HASH CON INTELLJ se cambia donde pone java7+ esta arriba)
+
+4º
+Explicacion patron singleton (Es una clase que solo se instrancia una vez y dentro de si misma, buscar en wikipedia ejemplo java)
+Crea un constructor vacio PRIVADO y se crea una variable estatica privada = null
+Luego se hacen 2 metodos 1 de ellos para crear una instancia de la clase (metodo privado) si no hay ninguna otra instancia la crea y
+otro metodo para coger esa instancia y crearla si no existe (este metodo es publico)
+
+Esto asegura que solo se pueda acceder a la clase desde 1 unico punto global (usando el metodo publico)
+
+
+5º
+Creamos una nueva clase java fuera de los demas package llamada SendMessageApplication (hereda de Application)
+sobreescribimos el metodo Oncreate y creamos un objeto user
+(Podemos reformar el codigo para que sea mas cómodo de leer en Code -> reformat code)
+Generamos el getter del user SOLO EL GETTER (setter no porque no vamos a modificar el usuario NUNCA)
+
+Vamos al manifest y añadimos la clase (dentro de <Application>) android:name=".SendMessageApplication"
+
+
+6º
+Refactorizamos SendMessageActivity
+
+Hacemos que el texto del usuario sea el de la clase POJO user, es decir, llamamos a nuestra clase Application (la clase singleton)
+luego de ahi cogemos su getUser() y dentro de ese getUser seleccionamos getUser(); (es decir con estos 2 getuser en el primero
+estamos en nuestra clase Application y cuando decimos ese getUser vamos a nuestra clase user y de ahi cogemos la variable user)
+Ver comentario codigo si no queda claro (Esta en SendMessageActivity)
+
+Impedimos que el EditText de user no sea editable
+
+Ya hemos conseguido que el user no pueda ser nulo ahora toca editar message
+
+Creamos un message (cuidado porque android importa su paquete message hay que cambiarlo al nuestro)
+
+Saldra un error debido a que el constructor solo funciona con 3 parametros por ello vamos a la clase Message
+y comentamos el constructor para ver que java por si solo crea el constructor vacio.
+
+Creamos un constructor vacio
+
+Finalmente creamos el message y añadimos los campos y ahroa añadimos el message al bundle
+
+Serializamos message y lo añadimos al bundle (añadir la interfaz serializable a la clase Message)
+
+Vamos a ViewMessageActivity y cambiamos el punto 3
+(Puede ocurrir el mismo error a la hora de importar la clase Message)
+ERROR NO SERIALIZABLE HAY QUE IMPLEMENTAR serializable A USER
+
+
+7º
+Controlar Errores
+
+en el metodo Onclick() llamamos a otros 2 nuevos metodos que controlan el error de mensaje vacio (emptyMessage() y ShowErrors()).
+
+Creamos un nuevo .xml en la carpeta res -> values (errors) y creamos un nuevo error de tipo string y en el metodo ShowErrors lo llamamos
