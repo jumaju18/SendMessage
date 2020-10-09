@@ -135,3 +135,45 @@ Añadimos 2 textview al layout view_message
 
 Asignamos los String a los textview con .setText();
 
+09/10
+
+1.- Sacamos el código de dentro y lo ponemos en un método (lo comentamos)
+
+2.- En java/com.example.sendmessage click derecho new, package uno que se llame "modelo" y otro 2ui" (user interface)
+
+3.- En modelo creamos dos clases de java, User y Message
+
+4.- En user creamos ->
+    private String user;
+    private String password;
+    private String email;
+y con alt insert añadimos get y set de todos, también hacer el toString, el constructor de User y el equals y hashCode.
+Template 7 next cogemos los que vayamos a comprar el email en este caso, luego en el hashcode dejamos emaily los no nulos activamos el tick
+
+5.- Creamos ->
+    private User user;
+    private String message;
+    private String date;
+Comentamos la clase Message, hacemos los get y set, el to string, el constructor y los metodos equals y el hashCode(esto ultimos en vez de con el Template de java 7 con el de intellij)
+
+6.- Hablamos del Patrón Singletone
+
+7.- Creamos SendMessageAplication a nivel de com.example.sendmessage
+
+7.5.- REfactorizamos de user.class el user a userName
+
+8.- En sendMessageActivity en findbyid añadimos edUser.setText(((SendMessageAplication)getApplication()).getUser().getUserName());
+
+9.- Nos vamos a layout de send, vamos a edUser y ponemos android:enabled="false"
+
+10.- Comentamos los dos setstring, vamos a message.class y creamos el constructor vacío
+
+11.- Volvems donde comentamos en el 10. y Message message = new Message();
+        message.setUser(((SendMessageAplication)getApplication()).getUser());
+        message.setMessage(edMessage.getText().toString());
+        message.setDate("09/10/2020");
+
+12.- en message.class la clasetiene que implementar el serializable "public class Message implements Serializable"
+
+13.- en viewmessageactivity import "com.example.sendmessage.modelo.Message;" y  debajo del comentario 3 "Message message = (Message)bundle.getSerializable("message");"
+

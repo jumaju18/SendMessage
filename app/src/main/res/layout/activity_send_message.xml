@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SendMessageActivity">
+    tools:context=".ui.SendMessageActivity"
+    android:id="@+id/coordinator">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -43,6 +44,7 @@
             android:labelFor="@+id/tvUser"
             android:inputType="textPersonName"
             tools:text="Nombre de usuario"
+            android:enabled="false"
             app:layout_constraintBaseline_toBaselineOf="@+id/tvUser"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.605"

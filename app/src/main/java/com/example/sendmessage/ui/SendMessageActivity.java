@@ -1,8 +1,11 @@
-package com.example.sendmessage;
+package com.example.sendmessage.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.sendmessage.R;
+import com.example.sendmessage.SendMessageAplication;
+import com.example.sendmessage.modelo.Message;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -42,28 +45,51 @@ public class SendMessageActivity extends AppCompatActivity {
         //findViewByID
         edUser = findViewById(R.id.edUser);
         edMessage = findViewById(R.id.edMessage);
+        edUser.setText(((SendMessageAplication)getApplication()).getUser().getUserName());
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // 1. Crear un objeto bundle donde se introduce
-                // dos cadenas de texto
-                Bundle bundle = new Bundle();
-                bundle.putString("user", edUser.getText().toString());
-                bundle.putString("message", edMessage.getText().toString());
-
-                //2. Secrea el mensaje o Intent que es explícito porque se
-                // conoce la Activity origen y la Activity destino
-                Intent intent = new Intent(SendMessageActivity.this, ViewMessageActivity.class);
-
-                //3. AÑadir el objeto al intent
-                intent.putExtras(bundle);
-
-                //4. iniciar la nueva actividad
-                startActivity(intent);
+                if (!emptyMessage()){
+                    sendMessage();
+                } else {
+                    showError(getResources().getString(R.string.error_empty_message));
+                }
             }
         });
+    }
+
+    /**
+     * ESte método envía un mensaje a la Actividad ViewMessageActivity
+     */
+    public void sendMessage(){
+        // 1. Crear un objeto bundle donde se introduce
+        // dos cadenas de texto
+        Bundle bundle = new Bundle();
+        //bundle.putString("user", edUser.getText().toString());
+        //bundle.putString("message", edMessage.getText().toString());
+        Message message = new Message();
+        message.setUser(((SendMessageAplication)getApplication()).getUser());
+        message.setMessage(edMessage.getText().toString());
+        message.setDate("09/10/2020");
+        bundle.putSerializable("message", message);
+
+        //2. Secrea el mensaje o Intent que es explícito porque se
+        // conoce la Activity origen y la Activity destino
+        Intent intent = new Intent(SendMessageActivity.this, ViewMessageActivity.class);
+
+        //3. AÑadir el objeto al intent
+        intent.putExtras(bundle);
+
+        //4. iniciar la nueva actividad
+        startActivity(intent);
+    }
+    private boolean emptyMessage(){
+        return edMessage.getText().toString().isEmpty();
+    }
+    private void showError(String error){
+        Snackbar.make(findViewById(R.id.coordinator),error,Snackbar.LENGTH_LONG);
     }
     //region Métodos Callback del ciclo de vida
 

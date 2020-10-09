@@ -1,12 +1,14 @@
-package com.example.sendmessage;
+package com.example.sendmessage.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.widget.TextView;
 
+import com.example.sendmessage.R;
+import com.example.sendmessage.modelo.Message;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
@@ -42,6 +44,7 @@ public class ViewMessageActivity extends AppCompatActivity {
         //2. REcoger el objeto Bundle del Intent
         Bundle bundle = intent.getExtras();
         //3. Asignar las cadenas String a los widget
+        Message message = (Message)bundle.getSerializable("message");
         tvUser.setText(bundle.getString("user"));
         tvMessage.setText(bundle.getString("message"));
 
